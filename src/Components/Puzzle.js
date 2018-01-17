@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PuzzleLetter from './PuzzleLetter'
 
 class Puzzle extends Component {
 
@@ -23,7 +24,7 @@ class Puzzle extends Component {
 
   initiateGame = e => {
     e.preventDefault()
-    let randomPuzzle = this.state.puzzles[Math.floor(Math.random()*this.state.puzzles.length)].split('')
+    let randomPuzzle = this.state.puzzles[Math.floor(Math.random()*this.state.puzzles.length)].split('').map( x=>x.toUpperCase())
     this.setState({
       gameInProgress: true,
       currentPuzzle: randomPuzzle
@@ -36,7 +37,8 @@ class Puzzle extends Component {
       <div>
         This will be your puzzle
         { this.state.gameInProgress ? (
-          this.state.currentPuzzle.map( x => <p>_</p>)
+
+          this.state.currentPuzzle.map( (x,i) => <PuzzleLetter props={x} key={i}/>)
         ) : (
           <button
             name='newGameButton'
