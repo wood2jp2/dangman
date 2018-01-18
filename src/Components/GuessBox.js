@@ -5,32 +5,40 @@ class GuessBox extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      all: props,
+      currentPuzzle: props.puzzle,
       currentGuess: '',
       submittedGuesses: []
     }
+
+    this.onChange = this.onChange.bind(this)
+    this.submitGuess = this.submitGuess.bind(this)
   }
 
   onChange = e => {
     this.setState({
       currentGuess: e.target.value.toUpperCase()
     })
-    console.log(this.state.currentGuess)
   }
 
   submitGuess = e => {
     e.preventDefault()
-    this.state.submittedGuesses.push[3]
+    if (!this.state.submittedGuesses.includes(this.state.currentGuess)) {
+
+    }
+
+    !this.state.submittedGuesses.includes(this.state.currentGuess) ? (
+      this.setState({
+        submittedGuesses: this.state.submittedGuesses.concat([this.state.currentGuess])
+      })
+    ) : (alert(`You've already guessed ${this.state.currentGuess}`))
+
     console.log(this.state.submittedGuesses)
   }
 
   render() {
     return (
       <form
-        value={this.state.currentGuess}
-        onSubmit={e => {
-          this.submitGuess(e)
-        }}>
+        onSubmit={this.submitGuess}>
         <label>
           Guess:
         <input
