@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 const PuzzleLetter = props => {
-  console.log(props)
+  console.log(props.props)
   return (<div>_</div>)
 }
 

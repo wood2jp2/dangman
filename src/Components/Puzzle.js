@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PuzzleLetter from './PuzzleLetter'
+import GuessBox from './GuessBox'
 
 class Puzzle extends Component {
 
@@ -29,21 +30,24 @@ class Puzzle extends Component {
       gameInProgress: true,
       currentPuzzle: randomPuzzle
     })
-    console.log(this.state)
   }
 
   render() {
+    let startButton = null
+    let puzzle = null
+    let guessBox = null
+    if (!this.state.gameInProgress) {
+      startButton = <button name='newGameButton' onClick={ e => this.initiateGame(e)}>Start a new game!</button>
+    } else {
+      puzzle = this.state.currentPuzzle.map( (x,i) => <PuzzleLetter props={this.state} key={i}/>)
+      guessBox = <GuessBox puzzle={this.state.currentPuzzle}/>
+    }
     return (
       <div>
         This will be your puzzle
-        { this.state.gameInProgress ? (
-
-          this.state.currentPuzzle.map( (x,i) => <PuzzleLetter props={x} key={i}/>)
-        ) : (
-          <button
-            name='newGameButton'
-            onClick={ e => this.initiateGame(e)}>Start a new game!</button>
-        )}
+        {startButton}
+        {puzzle}
+        {guessBox}
         <button
           name='checkState'
           onClick={ e => this.checkState(e)}>Check State</button>
