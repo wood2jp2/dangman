@@ -22,21 +22,19 @@ class GuessBox extends Component {
 
   submitGuess = e => {
     e.preventDefault()
-    if (!this.state.submittedGuesses.includes(this.state.currentGuess)) {
-
-    }
 
     !this.state.submittedGuesses.includes(this.state.currentGuess) ? (
       this.setState({
         submittedGuesses: this.state.submittedGuesses.concat([this.state.currentGuess])
       })
-    ) : (alert(`You've already guessed ${this.state.currentGuess}`))
+    ) : (alert(`You've already guessed ${this.state.currentGuess}!`))
 
     console.log(this.state.submittedGuesses)
   }
 
   render() {
     return (
+      <div>
       <form
         onSubmit={this.submitGuess}>
         <label>
@@ -51,6 +49,10 @@ class GuessBox extends Component {
         </label>
         <input type="submit" value="Submit" />
       </form>
+      <div>Submitted Guesses: {this.state.submittedGuesses.map( x => {
+        return <div key={x}><p>{x}</p></div>
+      })}</div>
+      </div>
     )
   }
 
