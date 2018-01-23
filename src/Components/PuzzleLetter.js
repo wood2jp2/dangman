@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 const PuzzleLetter = props => {
-  return (<div>_</div>)
+  return (<div>{props.character}</div>)
 }
 
 export default PuzzleLetter

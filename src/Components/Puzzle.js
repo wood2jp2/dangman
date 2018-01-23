@@ -70,7 +70,7 @@ class Puzzle extends Component {
     if (!this.state.gameInProgress) {
       startButton = <button name='newGameButton' onClick={ e => this.initiateGame(e)}>Start a new game!</button>
     } else {
-      puzzle = this.state.stateOfPuzzle.map( (x,i) => <PuzzleLetter data-letter={this.state.currentPuzzle[i]} props={this.state} key={i}/>)
+      puzzle = this.state.stateOfPuzzle.map( (x,i) => <PuzzleLetter character={x} key={i}/>)
       guessBox = <GuessBox puzzle={this.state.currentPuzzle} checkSubmission={this.reviseStateOfPuzzle}/>
     }
 
