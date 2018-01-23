@@ -17,7 +17,7 @@ class Puzzle extends Component {
       stateOfPuzzle: '',
       incorrectGuesses: [],
       correctGuesses: [],
-      guessesLeft: 10,
+      guessesLeft: 3,
       wins: 0,
       losses: 0,
       gameInProgress: false
@@ -52,12 +52,28 @@ class Puzzle extends Component {
          stateOfPuzzle: newlyGuessedPuzzle
        })
 
-       console.log(this.state.stateOfPuzzle)
+       if (this.state.currentPuzzle.join() === this.state.stateOfPuzzle.join()) {
+         let addWin = this.state.wins+1
+         this.setState({
+           wins: addWin
+         })
+         console.log(this.state.wins)
+       }
 
      } else {
+       let loseGuess = this.state.guessesLeft-1
        this.setState({
-         guessesLeft: this.state.guessesLeft--
+         guessesLeft: loseGuess
        })
+       if (loseGuess === 0) {
+         let addLoss = this.state.losses+1
+         alert('You Lose!')
+
+         this.setState({
+           gameInProgress: false,
+           losses: addLoss
+         })
+       }
      }
    }
 
