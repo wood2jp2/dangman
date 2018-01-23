@@ -33,39 +33,47 @@ class Puzzle extends Component {
       currentPuzzle: randomPuzzle,
       stateOfPuzzle: stateOfPuzzle
     })
-
   }
+
+  reviseStateOfPuzzle = letter => {
+
+     let newlyGuessedPuzzle = this.state.stateOfPuzzle
+
+     if (this.state.currentPuzzle.includes(letter)) {
+
+       this.state.currentPuzzle.forEach( (x, i) => {
+         if (x === letter) {
+           newlyGuessedPuzzle[i] = letter
+         }
+       })
+
+       this.setState({
+         correctGuesses: this.state.correctGuesses.concat([letter]),
+         stateOfPuzzle: newlyGuessedPuzzle
+       })
+
+       console.log(this.state.stateOfPuzzle)
+
+     } else {
+       this.setState({
+         guessesLeft: this.state.guessesLeft--
+       })
+     }
+   }
+
 
   render() {
     let startButton = null
     let puzzle = null
     let guessBox = null
+
     if (!this.state.gameInProgress) {
       startButton = <button name='newGameButton' onClick={ e => this.initiateGame(e)}>Start a new game!</button>
     } else {
       puzzle = this.state.stateOfPuzzle.map( (x,i) => <PuzzleLetter data-letter={this.state.currentPuzzle[i]} props={this.state} key={i}/>)
-      guessBox = <GuessBox puzzle={this.state.currentPuzzle} checkSubmission={letter => {
-        if (this.state.currentPuzzle.includes(letter)) {
-          let newlyGuessedPuzzle = []
-          this.state.currentPuzzle.forEach( x => {
-            if (x === letter) {
-              newlyGuessedPuzzle.push(letter)
-            } else {
-              newlyGuessedPuzzle.push('_')
-            }
-          })
-          this.setState({
-            correctGuesses: this.state.correctGuesses.concat([letter]),
-            stateOfPuzzle: newlyGuessedPuzzle
-          })
-          console.log(this.state.stateOfPuzzle)
-        } else {
-          this.setState({
-            guessesLeft: this.state.guessesLeft--
-          })
-        }
-      }} />
+      guessBox = <GuessBox puzzle={this.state.currentPuzzle} checkSubmission={this.reviseStateOfPuzzle}/>
     }
+
     return (
       <div>
         This will be your puzzle
