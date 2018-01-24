@@ -55,20 +55,22 @@ class Puzzle extends Component {
        if (this.state.currentPuzzle.join() === this.state.stateOfPuzzle.join()) {
          let addWin = this.state.wins+1
          this.setState({
+           gameInProgress: false,
            wins: addWin
          })
-         console.log(this.state.wins)
        }
 
      } else {
+
        let loseGuess = this.state.guessesLeft-1
+
        this.setState({
          guessesLeft: loseGuess
        })
+
        if (loseGuess === 0) {
          let addLoss = this.state.losses+1
          alert('You Lose!')
-
          this.setState({
            gameInProgress: false,
            losses: addLoss
@@ -92,7 +94,6 @@ class Puzzle extends Component {
 
     return (
       <div>
-        This will be your puzzle
         {startButton}
         {puzzle}
         {guessBox}
@@ -102,7 +103,6 @@ class Puzzle extends Component {
       </div>
     )
   }
-
 }
 
 export default Puzzle
