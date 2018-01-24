@@ -14,11 +14,17 @@ class Category extends Component {
     this.setState({
       category: e.target.value
     })
+    console.log(this.state.category)
   }
 
   render() {
     const categoryDropdown = <div>
-      <select className='category' value={this.state.category}>
+      <select
+        className='category'
+        value={this.state.category}
+        onChange={ e => {
+          this.setCategory(e)
+        }}>
         <option value='null'>First, choose a category for your puzzle!</option>
         <option value="TV">TV</option>
         <option value="Movies">Movies</option>
@@ -26,8 +32,6 @@ class Category extends Component {
         <option value="Code">Code</option>
       </select>
     </div>
-
-    console.log(this.state.category)
 
     return (
       <div>
