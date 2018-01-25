@@ -2,11 +2,15 @@ import React, { Component } from 'react';
 
 class Category extends Component {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       category: ''
     }
+
+    this.setCategory = this.setCategory.bind(this)
+    this.continueButton = this.continueButton.bind(this)
+
   }
 
   setCategory = e => {
@@ -14,10 +18,17 @@ class Category extends Component {
     this.setState({
       category: e.target.value
     })
-    console.log(this.state.category)
+  }
+
+  continueButton = e => {
+    e.preventDefault()
+    // console.log(this.state.category)
+    console.log(this.props.setCategory)
+    this.props.setCategory(this.state.category)
   }
 
   render() {
+
     const categoryDropdown = <div>
       <select
         className='category'
@@ -41,13 +52,16 @@ class Category extends Component {
           name='continueButton'
           value={categoryDropdown}
           onClick={ e => {
-            this.setCategory(e)
-          }}>
+            this.continueButton(e)
+          }}
+          >
           Continue to Puzzle
         </button>
       </div>
     )
   }
+
+
 
 }
 
