@@ -3,8 +3,6 @@ import './App.css';
 import Header from './Components/Header';
 import Puzzle from './Components/Puzzle';
 import Category from './Components/Category';
-import { BrowserRouter as Router, Route, Link, Redirect, Switch } from "react-router-dom";
-
 
 class App extends Component {
   constructor() {
@@ -21,23 +19,18 @@ class App extends Component {
     console.log(this.state)
   }
 
-  categoryComponent = props => {
+  puzzleComponent = props => {
     return (
-      <Category setCategory={this.setCategory} />
+      <Puzzle category={this.state.category} />
     )
   }
 
   render() {
 
     return (
-      <Router>
-        <div className="App">
-          <Header />
-
-          <Route exact path='/category' component={ this.categoryComponent }/>
-          <Route exact path='/puzzle' component={ Puzzle } />
-        </div>
-      </Router>
+      <div className='App'>
+        <Category setCategory={this.setCategory}/>
+      </div>
     );
   }
 }

@@ -22,41 +22,41 @@ class Category extends Component {
 
   continueButton = e => {
     e.preventDefault()
-    // console.log(this.state.category)
-    console.log(this.props.setCategory)
     this.props.setCategory(this.state.category)
   }
 
   render() {
 
     const categoryDropdown = <div>
+      <form>
       <select
         className='category'
         value={this.state.category}
         onChange={ e => {
           this.setCategory(e)
-        }}>
+        }}
+        >
         <option value='null'>First, choose a category for your puzzle!</option>
         <option value="TV">TV</option>
         <option value="Movies">Movies</option>
         <option value="Miscellanious">Miscellanious</option>
         <option value="Code">Code</option>
-      </select>
+
+
+          </select>
+          <button
+            name='continueButton'
+            value={categoryDropdown}
+            onClick={ e => {
+              this.continueButton(e)
+            }}
+          >Continue to Puzzle</button>
+      </form>
     </div>
 
     return (
       <div>
         {categoryDropdown}
-
-        <button
-          name='continueButton'
-          value={categoryDropdown}
-          onClick={ e => {
-            this.continueButton(e)
-          }}
-          >
-          Continue to Puzzle
-        </button>
       </div>
     )
   }
